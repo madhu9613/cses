@@ -4,11 +4,12 @@ int main()
 {
     int n;
     cin>>n;
-    set<int> nums;
-    for(int i=0;i<n;i++)
-    {
-        int a;cin>>a;nums.insert(a);
-    }
-    cout<<nums.size()<<endl;
+   set<int>s ;
+   for(int i=0;i<n;i++)
+   {
+    int a;cin>>a;
+    s.insert(a);
+   }
+   cout<<s.size();
     return 0;
 }

@@ -1,34 +1,36 @@
-// Given an array of n integers, your task is to count the number of subarrays where the sum of values is divisible by n.
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
+int find(vector<int>num,int n)
+{  
+    map<int,int>remcount;
+    remcount[0]=1; //means sub array with remainder 0 is 1
+    int prefixsum=0;int c=0;
+    for(int x:num)
+  {
+    prefixsum+=x;
+    int remainder=((prefixsum%n)+n)%n;
+    if(remcount.find(remainder)!=remcount.end())
+    {
+        c+=remcount[remainder];
+    }
+     remcount[remainder]++;
+   
+  }
+     
+ return c;
 
-int main() {
+}
+int32_t main()
+{
     int n;
-    cin >> n;
-    
-    long long arr[n];
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    cin>>n;
+    vector<int> num;
+    for(int i=0;i<n;i++)
+    {
+        int a;cin>>a;
+        num.push_back(a);
     }
-
-    unordered_map<int, int> count_map;
-    count_map[0] = 1; 
-    
-    long long prefix_sum = 0;
-    long long count = 0;
-    
-    for (int i = 0; i < n; i++) {
-        prefix_sum += arr[i];
-        
-        int remainder = ((prefix_sum % n) + n) % n;
-        
-        if (count_map.find(remainder) != count_map.end()) {
-            count += count_map[remainder];
-        }
-        
-        count_map[remainder]++;
-    }
-    
-    cout << count << endl;
+    cout<<find(num,n);
     return 0;
 }
