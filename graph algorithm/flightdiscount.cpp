@@ -1,42 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
+typedef long long ll;
 
-vector<vector<pair<int, int>>> graph;
-int n, m,k;
-vector<priority_queue<int>> dist;
+vector<vector<pair<ll, ll>>> graph;
+int n, m;
+
 struct node {
-    int cost, city, used;
+    ll cost, city, used;
     bool operator>(const node &other) const {
-        return cost > other.cost; // min heap
+        return cost > other.cost;
     }
 };
 
-int dijkstra() {
-    vector<vector<int>> dist(n + 1, vector<int>(2, LLONG_MAX));
+ll dijkstra() {
+    vector<vector<ll>> dist(n + 1, vector<ll>(2, LLONG_MAX));
+    vector<vector<bool>> visited(n + 1, vector<bool>(2, false));
     priority_queue<node, vector<node>, greater<node>> pq;
 
-    dist[1][0] = 0; // Start from node 1 without a discount
+    dist[1][0] = 0;
     pq.push({0, 1, 0});
 
     while (!pq.empty()) {
         auto [cur_cost, city, used] = pq.top();
         pq.pop();
 
-        if (cur_cost > dist[city][used]) {
-            continue;
-        }
+        if (visited[city][used]) continue;
+        visited[city][used] = true;
 
         for (auto &[neigh, weight] : graph[city]) {
-            // Case 1: Move to `neigh` without using discount
+            // Without using coupon
             if (cur_cost + weight < dist[neigh][used]) {
                 dist[neigh][used] = cur_cost + weight;
                 pq.push({dist[neigh][used], neigh, used});
             }
 
-            // Case 2: Use discount (only if not used before)
+            // With coupon
             if (!used) {
-                int new_cost = cur_cost + weight / 2; // Integer division
+                ll new_cost = cur_cost + weight / 2;
                 if (new_cost < dist[neigh][1]) {
                     dist[neigh][1] = new_cost;
                     pq.push({new_cost, neigh, 1});
@@ -45,24 +45,21 @@ int dijkstra() {
         }
     }
 
-    return min(dist[n][0], dist[n][1]); 
+    return min(dist[n][0], dist[n][1]);
 }
 
-int32_t main() {
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    cin >> n >> m>>k;
+    cin >> n >> m;
     graph.resize(n + 1);
-
-    for (int i = 0; i < m; i++) {
-        int a, b, c;
+    for (int i = 0; i < m; ++i) {
+        ll a, b, c;
         cin >> a >> b >> c;
-        graph[a].push_back({b, c}); // Directed edge
+        graph[a].emplace_back(b, c);
     }
 
-    int ans = dijkstra();
-    cout << ans << endl;
-
+    cout << dijkstra() << '\n';
     return 0;
 }
