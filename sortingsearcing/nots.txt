@@ -1,7 +1,0 @@
-2.Apertment. (greedy+two-pointer) [https://cses.fi/problemset/task/1084/]
-
-3.Ferris Wheel (greedy+two-pointer) [https://cses.fi/problemset/task/1090/]
-
-4.Concert Tickets  (binary search) [https://cses.fi/problemset/model/1091/]
-
-5.
