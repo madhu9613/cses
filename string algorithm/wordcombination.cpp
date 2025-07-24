@@ -1,49 +1,56 @@
-#include <iostream>
-#include <unordered_set>
-#include <vector>
-
-#define MOD 1000000007
-
+#include <bits/stdc++.h>
 using namespace std;
 
-unordered_set<string> dict;
-string s;
-int n;
-vector<int> dp; // Memoization table
+const int MOD = 1e9 + 7;
 
-int countWays(int index) {
-    if (index == n) return 1;  // If we reach the end, we found a valid way
-    if (dp[index] != -1) return dp[index]; // Return already computed result
-    
-    int ways = 0;
-    string temp = "";
+struct TrieNode {
+    unordered_map<char, TrieNode*> children;
+    bool is_end = false;
+};
 
-    // Try forming words starting from `index`
-    for (int i = index; i < n; i++) {
-        temp += s[i];  // Add character to current substring
-        if (dict.find(temp) != dict.end()) { // Check if it's a valid word
-            ways = (ways + countWays(i + 1)) % MOD; // Recursive call
-        }
+void insert(TrieNode* root, const string& word) {
+    TrieNode* node = root;
+    for (char ch : word) {
+        if (!node->children.count(ch))
+            node->children[ch] = new TrieNode();
+        node = node->children[ch];
     }
-
-    return dp[index] = ways; // Store result
+    node->is_end = true;
 }
 
 int main() {
+    string s;
     cin >> s;
+    int n = s.size();
+
     int k;
     cin >> k;
     
-    dict.clear();
-    n = s.length();
-    dp.assign(n + 1, -1); // Initialize DP array
-
-    string word;
-    for (int i = 0; i < k; i++) {
+    TrieNode* root = new TrieNode();
+    for (int i = 0; i < k; ++i) {
+        string word;
         cin >> word;
-        dict.insert(word);
+        insert(root, word);
     }
 
-    cout << countWays(0) << endl;
+    vector<int> dp(n + 1, 0);
+    dp[0] = 1;
+
+    for (int i = 0; i < n; ++i) {
+        if (dp[i] == 0) continue;
+
+        TrieNode* node = root;
+        for (int j = i; j < n; ++j) {
+            char ch = s[j];
+            if (!node->children.count(ch)) break;
+
+            node = node->children[ch];
+            if (node->is_end) {
+                dp[j + 1] = (dp[j + 1] + dp[i]) % MOD;
+            }
+        }
+    }
+
+    cout << dp[n] << '\n';
     return 0;
 }
