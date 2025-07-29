@@ -1,71 +1,107 @@
+// Author: Madhujya Rajkhowa
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5 + 5;
-vector<pair<int,int>> adj[N];
-vector<pair<int,int>> res;
-bool visited[N];
-int tin[N], low[N], timer;
-map<pair<int,int>, bool> used;
+#define ll long long
+#define pb push_back
+#define vi vector<int>
+#define vll vector<ll>
+#define all(x) (x).begin(), (x).end()
+#define endl '\n'
 
-bool dfs(int u, int parent) {
+const int MOD = 1e9 + 7;
+const int INF = INT_MAX;
+
+int n, m;
+vector<vector<int>> adj;
+vector<pair<int, int>> res; // To store directed edges
+vector<bool> visited;
+map<pair<int, int>, bool> used; // To prevent reusing the same edge
+int timer = 1;
+vector<int> tin, low;
+
+bool dfs(int u, int p = -1) {
     visited[u] = true;
     tin[u] = low[u] = ++timer;
 
-    for (auto [v, id] : adj[u]) {
-        if (v == parent) continue;
+    for (auto v : adj[u]) {
+        if (v == p)
+            continue;
 
         if (visited[v]) {
-            // Back edge
+            // Update low-link value
             low[u] = min(low[u], tin[v]);
 
+            // Add edge only if not already used in either direction
             if (!used[{u, v}] && !used[{v, u}]) {
-                res.push_back({u, v});
+                res.pb({u, v});
                 used[{u, v}] = true;
             }
         } else {
-            // Tree edge
             if (!used[{u, v}] && !used[{v, u}]) {
-                res.push_back({u, v});
+                res.pb({u, v});
                 used[{u, v}] = true;
             }
 
-            if (!dfs(v, u)) return false;
+            if (!dfs(v, u))
+                return false;
+
             low[u] = min(low[u], low[v]);
 
-            // Check bridge
+            // Check for bridge
             if (low[v] > tin[u]) {
-                // (u,v) is a bridge
-                return false;
+                return false; // Found a bridge
             }
         }
     }
+
     return true;
 }
 
-int main() {
-    int n, m;
+void solve() {
     cin >> n >> m;
-    vector<pair<int,int>> edges(m);
-    for (int i = 0; i < m; ++i) {
-        int a, b; cin >> a >> b;
-        adj[a].emplace_back(b, i);
-        adj[b].emplace_back(a, i);
+
+    // Resize and initialize global containers
+    adj.assign(n + 1, {});
+    visited.assign(n + 1, false);
+    tin.assign(n + 1, 0);
+    low.assign(n + 1, 0);
+    res.clear();
+    used.clear();
+    timer = 0;
+
+    // Read the undirected edges
+    for (int i = 0; i < m; i++) {
+        int a, b;
+        cin >> a >> b;
+        adj[a].pb(b);
+        adj[b].pb(a);
     }
 
-    if (!dfs(1, -1)) {
-        cout << "0\n";
-        return 0;
+    // Start DFS from node 1
+    if (!dfs(1)) {
+        cout << "IMPOSSIBLE" << endl; 
+        return;
     }
 
-    // Check if disconnected
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i <= n; i++) {
         if (!visited[i]) {
-            cout << "0\n";
-            return 0;
+            cout << "IMPOSSIBLE" << endl;
+            return;
         }
     }
 
-    for (auto [u, v] : res)
-        cout << u << " " << v << "\n";
+    for (auto &[u, v] : res) {
+        cout << u << " " << v << endl;
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    int t = 1;
+    while (t--) {
+        solve();
+    }
+    return 0;
 }
