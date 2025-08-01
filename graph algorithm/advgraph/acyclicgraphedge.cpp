@@ -17,7 +17,7 @@ int main() {
         cin >> u >> v;
         edges[i] = {u, v};
         adj[u].push_back(v);
-        adj[v].push_back(u);
+        // adj[v].push_back(u);
     }
 
     // Step 1: Topological sort using BFS (lex smallest)
@@ -44,25 +44,30 @@ int main() {
         }
     }
 
-    // Assign topological index
-    vector<int> topo_idx(n+1);
-    for (int i = 0; i < topo_order.size(); ++i) {
-        topo_idx[topo_order[i]] = i;
-    }
+    for(int i:topo_order)
+    {
+        cout<<i<<" ";
+    }cout<<endl;
 
-    // Step 2: Orient edges according to topological order
-    for (auto [u, v] : edges) {
-        if (topo_idx[u] < topo_idx[v]) {
-            result.push_back({u, v});
-        } else {
-            result.push_back({v, u});
-        }
-    }
+    // // Assign topological index
+    // vector<int> topo_idx(n+1);
+    // for (int i = 0; i < topo_order.size(); ++i) {
+    //     topo_idx[topo_order[i]] = i;
+    // }
 
-    // Output
-    for (auto [u, v] : result) {
-        cout << u << " " << v << "\n";
-    }
+    // // Step 2: Orient edges according to topological order
+    // for (auto [u, v] : edges) {
+    //     if (topo_idx[u] < topo_idx[v]) {
+    //         result.push_back({u, v});
+    //     } else {
+    //         result.push_back({v, u});
+    //     }
+    // }
+
+    // // Output
+    // for (auto [u, v] : result) {
+    //     cout << u << " " << v << "\n";
+    // }
 
     return 0;
 }
