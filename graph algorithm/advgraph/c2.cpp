@@ -4,7 +4,7 @@
 #include <cmath>
 
 const int MAXN = 200005;
-const int LOGN = 18; // ceil(log2(2e5)) = 17.6, so 18 is enough
+const int LOGN = 18; 
 
 std::vector<int> adj[MAXN];
 int depth[MAXN];

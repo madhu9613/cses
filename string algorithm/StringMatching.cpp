@@ -14,9 +14,8 @@ const int INF = INT_MAX;
 
 
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-const ll Z = 1111111111111111111;  // large prime
-const ll C = uniform_int_distribution<ll>(Z / 10, Z / 10 * 9)(rng);  // random base
-
+const ll Z = 1111111111111111111;  
+const ll C = uniform_int_distribution<ll>(Z / 10, Z / 10 * 9)(rng); 
 struct HashString {
     ll mul(ll a, ll b) { return __int128(a) * b % Z; }
 
