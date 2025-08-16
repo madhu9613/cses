@@ -28,6 +28,7 @@ for(int i=1;i<=n;i++)
     cin>>happy[i].a>>happy[i].b>>happy[i].c;
 }
 vector<vector<int>>dp(n+1,vector<int>(3,0));
+
 dp[1][0]=happy[1].a;
 dp[1][1]=happy[1].b;
 dp[1][2]=happy[1].c;
