@@ -22,35 +22,41 @@ const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 const ll LINF = 1e18;
 
-void solve() {
+void solve()
+{
     int n;
     cin >> n;
-    vll a(n + 1);
-    vll prefix(n + 1);
-    for (int i = 1; i <= n; i++) {
-        cin >> a[i];
-        prefix[i] = prefix[i - 1] + a[i];
+    vector<vector<int>> a(n, vector<int>(n));
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cin>>a[i][j];
+        }
     }
+    int total=1<<n;
+    vll dp(total+1,0);
+    dp[0]=1;
+    
+    for(int mask=0;mask<total;mask++)
+    {
+        int men=__builtin_popcount(mask);
+        if(men>=n) continue;
+        for(int w=0;w<n;w++)
+        {
+            if(!(mask&(1<<w)) && a[men][w])
+            {
+                int newmask=mask |(1<<w);
+                dp[newmask]=(dp[newmask]+dp[mask])%MOD;
 
-    auto sum = [&](int l, int r) -> ll {
-        return prefix[r] - prefix[l - 1];
-    };
-
-    vector<vector<ll>> dp(n + 2, vector<ll>(n + 2, 0));
-
-    for (int len = 2; len <= n; len++) {
-        for (int l = 1; l + len - 1 <= n; l++) {
-            int r = l + len - 1;
-            dp[l][r] = LINF;
-            for (int m = l; m < r; m++) {
-                dp[l][r] = min(dp[l][r], dp[l][m] + dp[m + 1][r] + sum(l, r));
             }
         }
     }
 
-    cout << dp[1][n] << "\n";
-}
+    cout<<dp[total-1]<<endl;
 
+}
 
 int main()
 {

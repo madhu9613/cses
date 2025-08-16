@@ -22,41 +22,50 @@ const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 const ll LINF = 1e18;
 
-void solve() {
-    int n;
-    cin >> n;
-    vll a(n + 1);
-    vll prefix(n + 1);
-    for (int i = 1; i <= n; i++) {
-        cin >> a[i];
-        prefix[i] = prefix[i - 1] + a[i];
-    }
+const int MAXN = 1e5 + 5;
+int n;
+vector<vector<int>> adj;
+ll dp[MAXN][2];
 
-    auto sum = [&](int l, int r) -> ll {
-        return prefix[r] - prefix[l - 1];
-    };
+void dfs(int u, int p = -1)
+{
+    dp[u][0] = dp[u][1] = 1;
 
-    vector<vector<ll>> dp(n + 2, vector<ll>(n + 2, 0));
-
-    for (int len = 2; len <= n; len++) {
-        for (int l = 1; l + len - 1 <= n; l++) {
-            int r = l + len - 1;
-            dp[l][r] = LINF;
-            for (int m = l; m < r; m++) {
-                dp[l][r] = min(dp[l][r], dp[l][m] + dp[m + 1][r] + sum(l, r));
-            }
+    for (int v : adj[u])
+    {
+        if (v == p)
+        {
+            continue;
         }
+        dfs(v, u);
+
+        dp[u][0] = (dp[u][0] * (dp[v][0] + dp[v][1]) % MOD) % MOD;
+
+        dp[u][1] = (dp[u][1] * dp[v][0]) % MOD;
     }
-
-    cout << dp[1][n] << "\n";
 }
+void solve()
+{
+    cin >> n;
+    adj.resize(n + 1);
+    for (int i = 1; i < n; i++)
+    {
+        int x, y;
+        cin >> x >> y;
+        adj[x].pb(y);
+        adj[y].pb(x);
+    }
+    dfs(1);
+    cout<<(dp[1][0]+dp[1][1])%MOD<<endl;
 
+}
 
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     int t = 1;
+   
     while (t--)
         solve();
     return 0;
