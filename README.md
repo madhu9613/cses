@@ -9,9 +9,9 @@ This folder contains **Dynamic Programming (DP) problems** from AtCoder. Each en
 
 | Task | Problem Name | Time Limit | Memory Limit | Problem Link | My Solution |
 |------|--------------|------------|--------------|--------------|-------------|
-| A | Frog 1 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_a) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/frog1.cpp) |
-| B | Frog 2 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_b) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/frog2.cpp) |
-| C | Vacation | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_c) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/vacation.cpp) |
+| A | Frog 1 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_a" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/frog1.cpp" target="_blank">Solution</a> |
+| B | Frog 2 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_b" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/frog2.cpp" target="_blank">Solution</a> |
+| C | Vacation | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_c" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/vacation.cpp" target="_blank">Solution</a> |
 
 </details>
 
@@ -20,12 +20,12 @@ This folder contains **Dynamic Programming (DP) problems** from AtCoder. Each en
 
 | Task | Problem Name | Time Limit | Memory Limit | Problem Link | My Solution |
 |------|--------------|------------|--------------|--------------|-------------|
-| D | Knapsack 1 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_d) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/knapsack1.cpp) |
-| E | Knapsack 2 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_e) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/knapsack2.cpp) |
-| F | LCS | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_f) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/lcs.cpp) |
-| G | Longest Path | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_g) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/longestpath.cpp) |
-| H | Grid 1 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_h) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/grid1.cpp) |
-| I | Coins | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_i) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/coin.cpp) |
+| D | Knapsack 1 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_d" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/knapsack1.cpp" target="_blank">Solution</a> |
+| E | Knapsack 2 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_e" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/knapsack2.cpp" target="_blank">Solution</a> |
+| F | LCS | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_f" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/lcs.cpp" target="_blank">Solution</a> |
+| G | Longest Path | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_g" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/longestpath.cpp" target="_blank">Solution</a> |
+| H | Grid 1 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_h" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/grid1.cpp" target="_blank">Solution</a> |
+| I | Coins | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_i" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/coin.cpp" target="_blank">Solution</a> |
 
 </details>
 
@@ -34,11 +34,11 @@ This folder contains **Dynamic Programming (DP) problems** from AtCoder. Each en
 
 | Task | Problem Name | Time Limit | Memory Limit | Problem Link | My Solution |
 |------|--------------|------------|--------------|--------------|-------------|
-| J | Sushi | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_j) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/sushi.cpp) |
-| K | Stones | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_k) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/stones.cpp) |
-| L | Deque | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_l) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/deque.cpp) |
-| M | Candies | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_m) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/candies.cpp) |
-| N | Slimes | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_n) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/slimes.cpp) |
+| J | Sushi | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_j" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/sushi.cpp" target="_blank">Solution</a> |
+| K | Stones | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_k" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/stones.cpp" target="_blank">Solution</a> |
+| L | Deque | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_l" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/deque.cpp" target="_blank">Solution</a> |
+| M | Candies | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_m" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/candies.cpp" target="_blank">Solution</a> |
+| N | Slimes | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_n" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/slimes.cpp" target="_blank">Solution</a> |
 
 </details>
 
@@ -47,12 +47,12 @@ This folder contains **Dynamic Programming (DP) problems** from AtCoder. Each en
 
 | Task | Problem Name | Time Limit | Memory Limit | Problem Link | My Solution |
 |------|--------------|------------|--------------|--------------|-------------|
-| O | Matching | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_o) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/matching.cpp) |
-| P | Independent Set | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_p) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/independentset.cpp) |
-| Q | Flowers | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_q) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/flowers.cpp) |
-| R | Walk | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_r) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/walk.cpp) |
-| S | Digit Sum | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_s) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/digitsum.cpp) |
-| T | Permutation | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_t) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/permutation.cpp) |
+| O | Matching | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_o" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/matching.cpp" target="_blank">Solution</a> |
+| P | Independent Set | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_p" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/independentset.cpp" target="_blank">Solution</a> |
+| Q | Flowers | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_q" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/flowers.cpp" target="_blank">Solution</a> |
+| R | Walk | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_r" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/walk.cpp" target="_blank">Solution</a> |
+| S | Digit Sum | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_s" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/digitsum.cpp" target="_blank">Solution</a> |
+| T | Permutation | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_t" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/permutation.cpp" target="_blank">Solution</a> |
 
 </details>
 
@@ -61,11 +61,11 @@ This folder contains **Dynamic Programming (DP) problems** from AtCoder. Each en
 
 | Task | Problem Name | Time Limit | Memory Limit | Problem Link | My Solution |
 |------|--------------|------------|--------------|--------------|-------------|
-| U | Grouping | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_u) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/grouping.cpp) |
-| V | Subtree | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_v) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/subtree.cpp) |
-| W | Intervals | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_w) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/intervals.cpp) |
-| X | Tower | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_x) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/tower.cpp) |
-| Y | Grid 2 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_y) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/grid2.cpp) |
-| Z | Frog 3 | 2 sec | 1024 MiB | [Link](https://atcoder.jp/contests/dp/tasks/dp_z) | [Solution](https://github.com/madhu9613/cses/blob/main/atcoderdp/frog3.cpp) |
+| U | Grouping | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_u" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/grouping.cpp" target="_blank">Solution</a> |
+| V | Subtree | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_v" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/subtree.cpp" target="_blank">Solution</a> |
+| W | Intervals | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_w" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/intervals.cpp" target="_blank">Solution</a> |
+| X | Tower | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_x" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/tower.cpp" target="_blank">Solution</a> |
+| Y | Grid 2 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_y" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/grid2.cpp" target="_blank">Solution</a> |
+| Z | Frog 3 | 2 sec | 1024 MiB | <a href="https://atcoder.jp/contests/dp/tasks/dp_z" target="_blank">Link</a> | <a href="https://github.com/madhu9613/cses/blob/main/atcoderdp/frog3.cpp" target="_blank">Solution</a> |
 
 </details>
