@@ -16,6 +16,7 @@ int main() {
         vector<int> bitCount(MAX_BITS, 0);
  
         for (int x : a) {
+            
             for (int b = 0; b < MAX_BITS; ++b) {
                 if (x & (1 << b)) {
                     bitCount[b]++;
