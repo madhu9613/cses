@@ -1,120 +1,160 @@
 #include <bits/stdc++.h>
+#define ll long long
+#define vi vector<int>
+#define vll vector<ll>
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define endl "\n"
+const int MOD = 1e9 + 7;
+const int INF = INT_MAX;
+const ll LINF = LLONG_MAX;
+const int MAXN = 2e5 + 5;
 using namespace std;
 
-typedef long long ll;
-const int N = 2e5 + 5;
-
-struct Node {
+struct node
+{
     ll sum = 0;
     ll lazy_add = 0;
     ll lazy_set = 0;
-    bool to_set = false;
+    bool toset = false;
 };
 
-Node tree[4 * N];
+node tree[4 * MAXN];
 int n, q;
-vector<ll> arr;
-
-void build(int node, int l, int r) {
-    if (l == r) {
-        tree[node].sum = arr[l];
+vll a;
+void build(int n, int l, int r)
+{
+    if (l == r)
+    {
+        tree[n].sum = a[l];
         return;
     }
-    int mid = (l + r) / 2;
-    build(2*node, l, mid);
-    build(2*node+1, mid+1, r);
-    tree[node].sum = tree[2*node].sum + tree[2*node+1].sum;
+
+    int m = l + (r - l) / 2;
+    build(2 * n, l, m);
+    build(2 * n + 1, m + 1, r);
+    tree[n].sum = tree[2 * n].sum + tree[2 * n + 1].sum;
 }
 
-void push(int node, int l, int r) {
-    if (tree[node].to_set) {
-        tree[node].sum = (r - l + 1) * tree[node].lazy_set;
-        if (l != r) {
-            int left = 2*node, right = 2*node+1;
-            tree[left].lazy_set = tree[right].lazy_set = tree[node].lazy_set;
-            tree[left].lazy_add = tree[right].lazy_add = 0;
-            tree[left].to_set = tree[right].to_set = true;
+void push(int n, int l, int r)
+{
+    if (tree[n].toset)
+    {
+        tree[n].sum = (r - l + 1) * tree[n].lazy_set;
+        if (l != r)
+        {
+            int left = 2 * n, right = 2 * n + 1;
+            tree[left].lazy_set = tree[right].lazy_set = tree[n].lazy_set;
+            tree[left].lazy_add = tree[right].lazy_add = tree[n].lazy_add;
+            tree[left].toset = tree[right].toset = true;
         }
-        tree[node].lazy_set = 0;
-        tree[node].to_set = false;
+        tree[n].lazy_set = 0;
+        tree[n].toset = false;
     }
-
-    if (tree[node].lazy_add != 0) {
-        tree[node].sum += (r - l + 1) * tree[node].lazy_add;
-        if (l != r) {
-            int left = 2*node, right = 2*node+1;
-            tree[left].lazy_add += tree[node].lazy_add;
-            tree[right].lazy_add += tree[node].lazy_add;
+    if (tree[n].lazy_add != 0)
+    {
+        tree[n].sum += (r - l + 1) * tree[n].lazy_add;
+        if (l != r)
+        {
+            int left = 2 * n, right= 2 * n + 1;
+            tree[left].lazy_add += tree[n].lazy_add;
+            tree[right].lazy_add += tree[n].lazy_add;
         }
-        tree[node].lazy_add = 0;
+        tree[n].lazy_add = 0;
     }
 }
 
-void update_add(int node, int l, int r, int ql, int qr, ll val) {
-    push(node, l, r);
-    if (r < ql || l > qr) return;
-    if (ql <= l && r <= qr) {
-        tree[node].lazy_add += val;
-        push(node, l, r);
+void update_add(int n, int l, int r, int ql, int qr, ll val)
+{
+    push(n, l, r);
+    if (r < ql || l > qr)
+        return;
+    if (ql <= l && r <= qr)
+    {
+        tree[n].lazy_add += val;
+        push(n, l, r);
         return;
     }
-    int mid = (l + r) / 2;
-    update_add(2*node, l, mid, ql, qr, val);
-    update_add(2*node+1, mid+1, r, ql, qr, val);
-    tree[node].sum = tree[2*node].sum + tree[2*node+1].sum;
+    int m = l + (r - l) / 2;
+    update_add(2 * n, l, m, ql, qr, val);
+    update_add(2 * n + 1, m + 1, r, ql, qr, val);
+    tree[n].sum = tree[2 * n].sum + tree[2 * n + 1].sum;
 }
 
-void update_set(int node, int l, int r, int ql, int qr, ll val) {
-    push(node, l, r);
-    if (r < ql || l > qr) return;
-    if (ql <= l && r <= qr) {
-        tree[node].to_set = true;
-        tree[node].lazy_set = val;
-        tree[node].lazy_add = 0;
-        push(node, l, r);
+void update_set(int n, int l, int r, int ql, int qr, ll val)
+
+{
+    push(n, l, r);
+    if (r < ql || l > qr)
+        return;
+    if (ql <= l && r <= qr)
+    {
+        tree[n].toset = true;
+        tree[n].lazy_set = val;
+        tree[n].lazy_add = 0;
+        push(n, l, r);
         return;
     }
-    int mid = (l + r) / 2;
-    update_set(2*node, l, mid, ql, qr, val);
-    update_set(2*node+1, mid+1, r, ql, qr, val);
-    tree[node].sum = tree[2*node].sum + tree[2*node+1].sum;
+
+    int m = l + (r - l) / 2;
+    update_set(2 * n, l, m, ql, qr, val);
+    update_set(2 * n + 1, m + 1,r, ql, qr, val);
+    tree[n].sum = tree[2 * n].sum + tree[2 * n + 1].sum;
 }
 
-ll query(int node, int l, int r, int ql, int qr) {
-    push(node, l, r);
-    if (r < ql || l > qr) return 0;
-    if (ql <= l && r <= qr) return tree[node].sum;
-    int mid = (l + r) / 2;
-    return query(2*node, l, mid, ql, qr) + query(2*node+1, mid+1, r, ql, qr);
+ll query(int n, int l, int r, int ql, int qr)
+{
+    push(n, l, r);
+
+    if (r < ql || l > qr)
+        return 0;
+    if (ql <= l && r <= qr)
+        return tree[n].sum;
+
+    int m = l + (r - l) / 2;
+    return query(2 * n, l, m, ql, qr) + query(2 * n + 1, m + 1, r, ql, qr);
 }
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
+void solve()
+{
+    int n, q;
     cin >> n >> q;
-    arr.resize(n);
-    for (int i = 0; i < n; ++i)
-        cin >> arr[i];
+    a.resize(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
 
     build(1, 0, n - 1);
-
-    while (q--) {
+    while (q--)
+    {
         int type, a, b;
         cin >> type >> a >> b;
-        a--, b--;  // convert to 0-based indexing
-
-        if (type == 1) {
+        a--, b--;
+        if (type == 1)
+        {
             ll x;
             cin >> x;
             update_add(1, 0, n - 1, a, b, x);
-        } else if (type == 2) {
-            ll x;
+        }
+        else if (type == 2)
+        {
+            int x;
             cin >> x;
             update_set(1, 0, n - 1, a, b, x);
-        } else if (type == 3) {
-            cout << query(1, 0, n - 1, a, b) << "\n";
         }
+        else
+        {
+            cout << query(1, 0, n - 1, a, b) << endl;
+        }
+    }
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t = 1;
+    // cin>>t;
+    while (t--)
+    {
+        solve();
     }
 
     return 0;

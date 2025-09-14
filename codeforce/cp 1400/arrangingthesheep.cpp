@@ -24,15 +24,18 @@ const ll LINF = 1e18;
 
 void solve() {
     int n;cin>>n;
-    int res=0;
-    vll a(n);
+    string s;cin>>s;
+    vi sheep;
     for(int i=0;i<n;i++)
     {
-        cin>>a[i];
-        res^=(int)(a[i]%4);
-
+        if(s[i]=='*')
+        {sheep.pb(i);}
     }
-    cout<<(res?"first":"second")<<endl;
+    int k=sheep.size();
+    vi pos_i_want(k);
+
+    int mid=l
+
 }
 
 int main() {
