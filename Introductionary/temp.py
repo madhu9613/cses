@@ -286,6 +286,27 @@ def manhattan_2d(node, goal):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
+class NQueenProblem(Problem): 
+    def __init__(self, n):
+        super().__init__(initial=tuple())
+        self.n = n
+        
+    def actions(self, state):
+        row = len(state)
+        return [col for col in range(self.n) if self.is_safe(state, row, col)]
+     
+    def result(self, state, action):
+        return state + (action,)
+     
+    def goal_test(self, state):
+        return len(state) == self.n
+     
+    def is_safe(self, state, row, col):
+        for r, c in enumerate(state):
+            if c == col or abs(row - r) == abs(col - c):
+                return False
+        return True
+
 # ===========================
 # MAIN DRIVER
 # ===========================
@@ -328,3 +349,22 @@ if __name__ == "__main__":
         print("Steps:", len(solutionnode2.solution()))
     else:
         print("No path found")
+
+
+if __name__ == "__main__":
+    n = int(input("Enter N: "))
+    problem = NQueenProblem(n)
+    
+    noofways, onesolution = bfs_all_solutions(problem)
+
+    print("\n Total Number of Solution:", noofways)
+
+    if onesolution:
+        print("\n One Example :")
+        solution_state = onesolution.state
+        for r in range(n):
+            row = ['.'] * n
+            row[solution_state[r]] = 'Q'
+            print(' '.join(row))
+        for step_node in onesolution.path():
+            print(step_node.state)
