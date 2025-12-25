@@ -42,51 +42,57 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-bool ispal(int n)
-{
-    int rev=0,original=n;
-    while(n>0)
-    {
-        rev=rev*10+(n%10);
-        n/=10;
+void solve() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; i++) cin >> a[i];
+
+    vector<int> cnt(n + 2), b(n + 1);
+
+    while (q--) {
+        int l, r;
+        cin >> l >> r;
+        cnt[l]++;
+        cnt[r + 1]--;
     }
-    return rev==original;
-}
-vi dp(MAXN);
-void pre() {
-    vi pal;
+
+    for (int i = 1; i <= n; i++)
+        cnt[i] += cnt[i - 1];
+
+  
+    vector<pair<int, int>> order;
+    for (int i = 1; i <= n; i++)
+        order.push_back({ cnt[i], i });
+
+
+    sort(order.begin(), order.end(), greater<>());
+
    
-    for(int i=1;i<MAXN;i++)
-    {
-        if(ispal(i))
-        {
-            pal.push_back(i);
-        }
-    }
-    dp[0]=1; //no of ways to get sum =0 is 1
+    sort(a.begin() + 1, a.end(), greater<int>());
 
-    for(int p:pal)
-    {
-        for(int sum=p;sum<MAXN;sum++)
-        {
-            dp[sum]=(dp[sum]+dp[sum-p])%MOD;
-        }
-    }
 
+    for (int i = 0; i < n; i++)
+        b[order[i].second] = a[i + 1];
+
+   ll ans=0;
+    for (int i = 1; i <= n; i++)
+    {
+        ans+=1LL*b[i]*cnt[i];
+   
+
+    }
+    cout<<ans<<endl;
 }
-void solve()
-{
-    int n;cin>>n;
-    cout<<dp[n]<<endl;
-}
+
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
     int t = 1;
-    cin >> t;
-    pre();
+    // cin >> t;
     while (t--)
         solve();
 

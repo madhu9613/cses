@@ -42,42 +42,36 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-bool ispal(int n)
-{
-    int rev=0,original=n;
-    while(n>0)
-    {
-        rev=rev*10+(n%10);
-        n/=10;
-    }
-    return rev==original;
-}
-vi dp(MAXN);
-void pre() {
-    vi pal;
-   
-    for(int i=1;i<MAXN;i++)
-    {
-        if(ispal(i))
-        {
-            pal.push_back(i);
-        }
-    }
-    dp[0]=1; //no of ways to get sum =0 is 1
-
-    for(int p:pal)
-    {
-        for(int sum=p;sum<MAXN;sum++)
-        {
-            dp[sum]=(dp[sum]+dp[sum-p])%MOD;
-        }
-    }
-
-}
-void solve()
-{
+void solve() {
     int n;cin>>n;
-    cout<<dp[n]<<endl;
+    vector<vector<char>>grid(n,vector<char>(n));
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            cin>>grid[i][j];
+        }
+    }
+
+    int ans=0;
+    for(int i=0;i<n/2;i++)
+    {
+        for(int j=0;j<n/2;j++)
+
+        {
+            char c1=grid[i][j];
+            char c2=grid[j][n-1-i];
+            char c3=grid[n-1-i][n-1-j];
+            char c4 =grid[n - 1 - j][i];
+            int maxi=max(c1,max(max(c2,c3),c4));
+
+             ans+=(maxi-c1)+(maxi-c2)+(maxi-c3)+(maxi-c4);
+
+        }
+    }
+
+    cout<<ans<<endl;
 }
 
 int main() {
@@ -86,7 +80,6 @@ int main() {
 
     int t = 1;
     cin >> t;
-    pre();
     while (t--)
         solve();
 

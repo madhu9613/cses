@@ -42,53 +42,41 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-bool ispal(int n)
-{
-    int rev=0,original=n;
-    while(n>0)
-    {
-        rev=rev*10+(n%10);
-        n/=10;
-    }
-    return rev==original;
-}
-vi dp(MAXN);
-void pre() {
-    vi pal;
-   
-    for(int i=1;i<MAXN;i++)
-    {
-        if(ispal(i))
-        {
-            pal.push_back(i);
-        }
-    }
-    dp[0]=1; //no of ways to get sum =0 is 1
+#include <bits/stdc++.h>
+using namespace std;
 
-    for(int p:pal)
-    {
-        for(int sum=p;sum<MAXN;sum++)
-        {
-            dp[sum]=(dp[sum]+dp[sum-p])%MOD;
+void solve() {
+    int n;
+    cin >> n;
+
+    vector<pair<int, int>> a(n);
+    for (auto& p : a) cin >> p.first >> p.second;
+
+    sort(a.begin(), a.end());
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+
+    for (auto& [l, r] : a) {
+
+        while (!pq.empty() && pq.top() < l)
+            pq.pop();
+
+        if ((int)pq.size() == 2) {
+            cout << "NO\n";
+            return;
         }
+
+        pq.push(r);
     }
 
-}
-void solve()
-{
-    int n;cin>>n;
-    cout<<dp[n]<<endl;
+    cout << "YES\n";
 }
 
 int main() {
     ios::sync_with_stdio(false);
-    cin.tie(0);
+    cin.tie(nullptr);
 
-    int t = 1;
-    cin >> t;
-    pre();
-    while (t--)
-        solve();
-
-    return 0;
+    solve();
 }
+
+

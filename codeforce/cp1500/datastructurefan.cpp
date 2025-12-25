@@ -42,42 +42,50 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-bool ispal(int n)
-{
-    int rev=0,original=n;
-    while(n>0)
-    {
-        rev=rev*10+(n%10);
-        n/=10;
-    }
-    return rev==original;
-}
-vi dp(MAXN);
-void pre() {
-    vi pal;
-   
-    for(int i=1;i<MAXN;i++)
-    {
-        if(ispal(i))
-        {
-            pal.push_back(i);
-        }
-    }
-    dp[0]=1; //no of ways to get sum =0 is 1
-
-    for(int p:pal)
-    {
-        for(int sum=p;sum<MAXN;sum++)
-        {
-            dp[sum]=(dp[sum]+dp[sum-p])%MOD;
-        }
-    }
-
-}
-void solve()
-{
+void solve() {
     int n;cin>>n;
-    cout<<dp[n]<<endl;
+    vi a(n+1),prefix(n+1,0);
+    for(int i=1;i<=n;i++)
+    {
+        cin>>a[i];
+    }
+    string s;cin>>s;
+    for(int i=1;i<=n;i++)
+    {
+        prefix[i]=prefix[i-1]^a[i];
+    }
+    int x0=0,x1=0;
+    for(int i=0;i<s.size();i++)
+    {
+        
+        if(s[i]=='0')
+        {
+            x0^=a[i+1];
+        }else{
+            x1^=a[i+1];
+        }
+    }
+    int q;cin>>q;while(q--)
+    {
+        int t;cin>>t;
+        if(t==1)
+        {
+            int l,r;cin>>l>>r;
+            int xr = prefix[r] ^ prefix[l - 1];
+            x0^=xr;
+            x1^=xr;
+        }
+        if(t==2)
+        {int g;
+            cin>>g;
+            if(g==0)
+            {
+                cout<<x0<<" ";
+            }else{
+                cout<<x1<<" ";
+            }
+        }
+    }
 }
 
 int main() {
@@ -86,7 +94,6 @@ int main() {
 
     int t = 1;
     cin >> t;
-    pre();
     while (t--)
         solve();
 

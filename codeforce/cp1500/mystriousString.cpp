@@ -42,42 +42,21 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-bool ispal(int n)
+vi segTree,lazy;
+string s;
+int n;
+void propogate(int node,int l,int r)
 {
-    int rev=0,original=n;
-    while(n>0)
+    if(lazy[node]!=0)
     {
-        rev=rev*10+(n%10);
-        n/=10;
-    }
-    return rev==original;
-}
-vi dp(MAXN);
-void pre() {
-    vi pal;
-   
-    for(int i=1;i<MAXN;i++)
-    {
-        if(ispal(i))
+        segTree[node]=(segTree[node]+lazy[node])%26;
+        if(l!=r)
         {
-            pal.push_back(i);
+            lazy[2*node]=(lazy[2*node]+lazy[node])%26;
         }
     }
-    dp[0]=1; //no of ways to get sum =0 is 1
-
-    for(int p:pal)
-    {
-        for(int sum=p;sum<MAXN;sum++)
-        {
-            dp[sum]=(dp[sum]+dp[sum-p])%MOD;
-        }
-    }
-
 }
-void solve()
-{
-    int n;cin>>n;
-    cout<<dp[n]<<endl;
+void solve() {
 }
 
 int main() {
@@ -86,7 +65,6 @@ int main() {
 
     int t = 1;
     cin >> t;
-    pre();
     while (t--)
         solve();
 

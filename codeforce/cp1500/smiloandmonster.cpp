@@ -1,63 +1,83 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <cmath> // For std::ceil
-
+#include <bits/stdc++.h>
 using namespace std;
 
+#define ll long long
+#define pb push_back
+#define vi vector<int>
+#define vll vector<ll>
+#define max3(a, b, c) max(max(a, b), c)
+#define max4(a, b, c, d) max(max(a, b), max(c, d))
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define all(x) (x).begin(), (x).end()
+#define rall(x) (x).rbegin(), (x).rend()
+#define endl '\n'
+
+ll gcd(ll a, ll b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+ll lcm(ll a, ll b) {
+    return a / gcd(a, b) * b;
+}
+ll pow(ll a, ll b, ll m)
+{
+    if (b == 0)
+        return 1;
+    if (b == 1) return a % m;
+    ll temp = pow(a, b / 2, m);
+    if (b % 2 == 0)
+    {
+        return (temp * temp) % m;
+    }
+    else
+    {
+        return (a * (temp * temp) % m) % m;
+    }
+}
+
+const int MOD = 1e9 + 7;
+const int INF = INT_MAX;
+const ll LINF = 1e18;
+
+const int MAXN = 40005;
+
 void solve() {
-    int n;
-    cin >> n;
-    vector<long long> a(n);
-    for (int i = 0; i < n; i++) {
+    int n;cin >> n;
+    vll a(n);
+    ll s = 0;
+    for (int i = 0;i < n;i++)
+    {
         cin >> a[i];
-    }
-
-    sort(a.begin(), a.end());
-    long long ops = 0;
-    long long x = 0;
-    int i = 0, j = n - 1;
-
-    while (i < j) {
-        if (x >= a[j]) {
-            ops++;
-            x -= a[j];
-            j--;
-        } else {
-            long long needed = a[j] - x;
-            if (i < j) {
-                long long take = min(a[i], needed);
-                x += take;
-                ops += take;
-                a[i] -= take;
-                if (a[i] == 0) {
-                    i++;
-                }
-            } else { // This case handles i == j after one loop
-                ops += needed;
-                x += needed;
-            }
-        }
-    }
-
-    if (x >= a[i]) {
-        ops++;
-    } else {
-        long long needed_final = a[i] - x;
-        ops += needed_final;
-        ops++; // For the ultimate attack
+        s += a[i];
     }
     
-    cout << ops << "\n";
+    ll rem = s/2;
+
+    sort(rall(a));
+    ll ans = s-rem;
+    for (int i = 0;i < n;i++)
+    {
+        if (rem <= 0)
+        {
+            break;
+        }
+        rem -= a[i];
+        ans++;
+    }
+
+    cout << ans << endl;
+
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
-    int t;
+
+    int t = 1;
     cin >> t;
-    while (t--) {
+    while (t--)
         solve();
-    }
+
     return 0;
 }

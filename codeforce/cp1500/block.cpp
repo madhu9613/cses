@@ -20,20 +20,20 @@ ll gcd(ll a, ll b) {
 ll lcm(ll a, ll b) {
     return a / gcd(a, b) * b;
 }
-ll pow(ll a,ll b,ll m)
+ll pow(ll a, ll b, ll m)
 {
-if(b==0)
- return 1;
-if(b==1) return a%m;
- ll temp=pow(a,b/2,m);
- if(b%2==0)
- {
- return (temp*temp)%m;
-}
-else
-{
-return (a*(temp*temp)%m)%m ;
-}
+    if (b == 0)
+        return 1;
+    if (b == 1) return a % m;
+    ll temp = pow(a, b / 2, m);
+    if (b % 2 == 0)
+    {
+        return (temp * temp) % m;
+    }
+    else
+    {
+        return (a * (temp * temp) % m) % m;
+    }
 }
 
 const int MOD = 1e9 + 7;
@@ -42,43 +42,27 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-bool ispal(int n)
-{
-    int rev=0,original=n;
-    while(n>0)
+void solve() {
+    int n;cin >> n;
+    vi a(n);
+    for (int i = 0;i < n;i++) cin >> a[i];
+
+    vi dp(n + 1, 0);
+
+    for (int i = n - 1;i >= 0;i--)
     {
-        rev=rev*10+(n%10);
-        n/=10;
-    }
-    return rev==original;
-}
-vi dp(MAXN);
-void pre() {
-    vi pal;
-   
-    for(int i=1;i<MAXN;i++)
-    {
-        if(ispal(i))
+        //delete i
+        dp[i] = dp[i + 1];
+
+        if (i + a[i] < n)
         {
-            pal.push_back(i);
+            dp[i] = max(dp[i], a[i] + 1 + dp[i + a[i] + 1]);
         }
     }
-    dp[0]=1; //no of ways to get sum =0 is 1
-
-    for(int p:pal)
-    {
-        for(int sum=p;sum<MAXN;sum++)
-        {
-            dp[sum]=(dp[sum]+dp[sum-p])%MOD;
-        }
-    }
+    cout<<n-dp[0]<<endl;
 
 }
-void solve()
-{
-    int n;cin>>n;
-    cout<<dp[n]<<endl;
-}
+
 
 int main() {
     ios::sync_with_stdio(false);
@@ -86,7 +70,6 @@ int main() {
 
     int t = 1;
     cin >> t;
-    pre();
     while (t--)
         solve();
 
