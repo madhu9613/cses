@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -44,43 +42,33 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
+struct seg{
+    int l,r,idx;
+};
 void solve() {
-    int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
+ int n;cin>>n;
+ vector<seg>a(n);
+ for(int i=0;i<n;i++)
+ {
+    cin>>a[i].l>>a[i].r;
+    a[i].idx=i+1;
+ }
+ sort(a.begin(),a.end(),[](auto &x,auto &y)
+{
+    if(x.l==y.l) return x.r>y.r;
+    return x.l<y.l;
+});
+int bestidx=0;
+for(int i=1;i<n;i++)
+{
+    if(a[i].r<=a[bestidx].r)
     {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
-
+        cout<<a[i].idx<<" "<<a[bestidx].idx<<endl;
+        return ;
     }
-    if(one>0)
-    {
-        cout<<n-one<<endl;
-        return;
-    }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
-    {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
-        {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
-            {
-                best=min(best,len);
-            }
-        }
-    }
-    if(best==INT_MAX)
-    {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
-    }
+    bestidx=i;
+}
+cout<<-1<<" "<<-1<<endl;
 }
 
 int main() {

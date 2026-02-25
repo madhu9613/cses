@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -45,50 +43,40 @@ const ll LINF = 1e18;
 const int MAXN = 40005;
 
 void solve() {
-    int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
-    {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
 
+    vector<vector<int>> freq(k, vector<int>(26, 0));
+
+    for (int i = 0; i < n; i++) {
+        freq[i % k][s[i] - 'a']++;
     }
-    if(one>0)
-    {
-        cout<<n-one<<endl;
-        return;
-    }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
-    {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
-        {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
-            {
-                best=min(best,len);
-            }
+
+    auto count = [&](int x, int y) -> int {
+        int total = 0, mx = 0;
+        for (int c = 0; c < 26; c++) {
+            total += freq[x][c] + freq[y][c];
+            mx = max(mx, freq[x][c] + freq[y][c]);
         }
+        return total - mx;
+        };
+
+    int ans = 0;
+
+    for (int i = 0; i < k; i++) {
+        ans += count(i, k - 1 - i);
     }
-    if(best==INT_MAX)
-    {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
-    }
+
+    cout << ans / 2 << "\n";
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
         solve();
 

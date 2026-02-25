@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -46,41 +44,37 @@ const int MAXN = 40005;
 
 void solve() {
     int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
-    {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
+    vll a(n),b(n);
+    for(int i=0;i<n;i++) cin>>a[i];
+    for(int i=0;i<n;i++) cin>>b[i];
 
-    }
-    if(one>0)
-    {
-        cout<<n-one<<endl;
-        return;
-    }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
+    int cnt0=0;
+    int maxi=0;
+    map<pair<ll,ll>,int>freq; //keep a[i] always +ve;
     for(int i=0;i<n;i++)
     {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
+        if(a[i]==0 && b[i]==0)
         {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
+            cnt0++;
+            continue;
+        }
+        if(a[i]!=0)
+        {
+            ll g=gcd(a[i],b[i]);
+            ll x=a[i]/g;
+            ll y=-b[i]/g;
+            if(x<0)
             {
-                best=min(best,len);
+                x=-x;
+                y=-y;
             }
+            freq[{x,y}]++;
+            maxi=max(maxi,freq[{x,y}]);
         }
     }
-    if(best==INT_MAX)
-    {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
-    }
+
+    cout<<cnt0+maxi<<endl;
+
 }
 
 int main() {

@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -45,42 +43,45 @@ const ll LINF = 1e18;
 const int MAXN = 40005;
 
 void solve() {
-    int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
+int n,k;cin>>n>>k;
+string s;cin>>s;
+for(int i=0;i<k;i++)
+{
+    char c='?';
+    for(int j=i;j<n;j+=k)
+   {
+    if(s[j]!='?')
     {
-        cin>>a[i];
-        if(a[i]==1)
+        if(c=='?') c=s[j];
+        else if(c!=s[j])
         {
-            one++;
+            cout<<"NO"<<endl;
+            return;
         }
+    }
+   }
 
-    }
-    if(one>0)
+   if(c!='?')
+   {
+    for(int j=i;j<n;j+=k)
     {
-        cout<<n-one<<endl;
-        return;
+        s[j]=c;
     }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
-    {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
-        {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
-            {
-                best=min(best,len);
-            }
-        }
-    }
-    if(best==INT_MAX)
-    {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
-    }
+   }
+}
+
+int cnt0,cnt1=0;
+for(int i=0;i<k;i++)
+{
+    if(s[i]=='0') cnt0++;
+    else if(s[i]=='1') cnt1++;
+}
+if(cnt0<=k/2 && cnt1<=k/2)
+{
+    cout<<"YES"<<endl;
+}else{
+    cout<<"NO"<<endl;
+}
 }
 
 int main() {
@@ -88,7 +89,7 @@ int main() {
     cin.tie(0);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
         solve();
 

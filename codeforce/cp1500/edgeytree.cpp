@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,45 +40,50 @@ const int MOD = 1e9 + 7;
 const int INF = INT_MAX;
 const ll LINF = 1e18;
 
-const int MAXN = 40005;
-
+const int MAXN = 2e5+7;
+vector<vector<int>>adj;
+vector<bool>vis;
+int sz=0;
+void dfs(int u)
+{
+    if(vis[u]){
+        return ;
+    }
+    vis[u]=true;
+    sz++;
+    for(int v:adj[u])
+    {
+        dfs(v);
+    }
+}
 void solve() {
-    int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
-    {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
+    int n,k;cin>>n>>k;
+    adj.resize(n+1);
 
-    }
-    if(one>0)
+    for(int i=0;i<n-1;i++)
     {
-        cout<<n-one<<endl;
-        return;
-    }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
-    {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
+        int u,v,x;cin>>u>>v>>x;
+        if(x==0)
         {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
-            {
-                best=min(best,len);
-            }
+            adj[u].push_back(v);
+            adj[v].push_back(u);
         }
     }
-    if(best==INT_MAX)
+   vis.assign(n+1,false);
+   ll ans=pow(n,k,MOD);
+   for(int i=1;i<=n;i++)
+   {
+    if(!vis[i])
     {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
+        sz=0;
+        dfs(i);
+        ans=(ans-pow(sz,k,MOD)+MOD)%MOD;
     }
+
+   }
+   cout<<ans<<" ";
+
+
 }
 
 int main() {

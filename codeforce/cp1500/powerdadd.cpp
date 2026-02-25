@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -45,42 +43,24 @@ const ll LINF = 1e18;
 const int MAXN = 40005;
 
 void solve() {
-    int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
-    {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
+    int n;cin>>n;vi a(n);
+    for(int i=0;i<n;i++) cin>>a[i];
 
-    }
-    if(one>0)
+    int best=0;
+    int maxi=a[0];
+    for(int i=1;i<n;i++)
     {
-        cout<<n-one<<endl;
-        return;
-    }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
-    {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
+        if(a[i]<maxi)
         {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
-            {
-                best=min(best,len);
-            }
+           best=max(best,maxi-a[i]);
+                
+        }else{
+            maxi=a[i];
         }
     }
-    if(best==INT_MAX)
-    {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
-    }
+    int tt=0;
+    while ((1LL << tt) - 1 < best) tt++;
+    cout<<tt<<endl;
 }
 
 int main() {
@@ -88,7 +68,7 @@ int main() {
     cin.tie(0);
 
     int t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--)
         solve();
 

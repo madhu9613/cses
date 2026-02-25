@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,44 +41,41 @@ const int INF = INT_MAX;
 const ll LINF = 1e18;
 
 const int MAXN = 40005;
+vector<vector<int>>adj;
+int ans=0;
+int dfs(int u,int p)
+{
 
+    int sz=1;
+    for(int v:adj[u])
+    {
+        if(v==p) continue;
+        int child=dfs(v,u);
+        if(child%2==0)
+        {
+            ans++;
+        }else{
+            sz+=child;
+        }
+    }
+    return sz;
+}
 void solve() {
     int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
+    adj.resize(n+1);
+    for(int i=0;i<n-1;i++)
     {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
-
+        int a,b;cin>>a>>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
-    if(one>0)
-    {
-        cout<<n-one<<endl;
-        return;
-    }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
-    {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
-        {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
-            {
-                best=min(best,len);
-            }
-        }
-    }
-    if(best==INT_MAX)
+    if(n%2==1)
     {
         cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
+        return;
     }
+  int x=  dfs(1,-1);
+  cout<<ans<<endl;
 }
 
 int main() {

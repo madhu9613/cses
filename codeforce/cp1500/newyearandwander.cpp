@@ -1,5 +1,3 @@
-//if already one [present] we can make all element 1 and either we need to make a subarrya element 1
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -44,43 +42,41 @@ const ll LINF = 1e18;
 
 const int MAXN = 40005;
 
-void solve() {
-    int n;cin>>n;
-    int one=0;
-    vi a(n);for(int i=0;i<n;i++) 
-    {
-        cin>>a[i];
-        if(a[i]==1)
-        {
-            one++;
-        }
 
-    }
-    if(one>0)
+void solve() {
+    int n,m;cin>>n>>m;
+    vector<vector<int>>adj(n+1);
+    for(int i=0;i<m;i++)
     {
-        cout<<n-one<<endl;
-        return;
+        int a,b;cin>>a>>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
-    //is a subarry exist which gcd can be 1
-    int best=INT_MAX;
-    for(int i=0;i<n;i++)
+    vector<int>res;
+    priority_queue<int,vector<int>,greater<int>>pq;
+    pq.push(1);
+    vector<int>vis(n+1,0);
+    vis[1]=1;
+    while (!pq.empty())
     {
-        int g=a[i];
-        for(int len=2;i+len-1<n;len++)
+        int u=pq.top();
+        pq.pop();
+        res.push_back(u);
+        
+        for(int v:adj[u])
         {
-            g=gcd(g,a[i+len-1]);
-            if(g==1)
+            if(!vis[v])
             {
-                best=min(best,len);
-            }
+                vis[v]=1;
+            pq.push(v);
         }
     }
-    if(best==INT_MAX)
-    {
-        cout<<-1<<endl;
-    }else{
-        cout<<best+n-2<<endl;
     }
+    
+    for(int x:res)
+    {
+        cout<<x<<" ";
+    }cout<<endl;
 }
 
 int main() {
