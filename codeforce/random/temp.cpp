@@ -1,75 +1,61 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using ll = long long;
-const ll INF = 4e18;
+const int INF = 1e9;
+
+int dp[31][31][51];
 
 int main() {
     ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    cin.tie(NULL);
 
-    int t;
-    cin >> t;
-    while (t--) {
-        int n;
-        cin >> n;
+    for (int n = 1;n <= 30;n++) {
+        for (int m = 1;m <= 30;m++) {
 
-        vector<vector<ll>> h(n, vector<ll>(n));
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-                cin >> h[i][j];
+            for (int k = 0;k <= 50;k++) {
 
-        vector<ll> a(n), b(n);
-        for (int i = 0; i < n; i++) cin >> a[i];
-        for (int j = 0; j < n; j++) cin >> b[j];
+                if (k == 0 || k == n * m) {
+                    dp[n][m][k] = 0;
+                    continue;
+                }
 
-        auto solve_line = [&](bool is_row) -> ll {
-            int m = n;
-            vector<vector<bool>> allowed(m - 1, vector<bool>(3, true));
-            // 0 => -1, 1 => 0, 2 => +1
+                dp[n][m][k] = INF;
 
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n - 1; j++) {
-
-                    ll d;
-                    if (is_row)
-                        d = h[j][i] - h[j + 1][i];
-                    else
-                        d = h[i][j] - h[i][j + 1];
-
-                    if (d >= -1 && d <= 1) {
-                        allowed[j][d + 1] = false;
+                // vertical cuts
+                for (int i = 1;i < m;i++) {
+                    for (int x = 0;x <= k;x++) {
+                        if (x <= n * i && k - x <= n * (m - i)) {
+                            dp[n][m][k] = min(
+                                dp[n][m][k],
+                                n * n + dp[n][i][x] + dp[n][m - i][k - x]
+                            );
+                        }
                     }
                 }
-            }
 
-            vector<vector<ll>> dp(m, vector<ll>(2, INF));
-            dp[0][0] = 0;
-            dp[0][1] = is_row ? a[0] : b[0];
-
-            for (int i = 0; i < m - 1; i++) {
-                for (int cur = 0; cur <= 1; cur++) {
-                    if (dp[i][cur] == INF) continue;
-
-                    for (int nxt = 0; nxt <= 1; nxt++) {
-                        int diff = nxt - cur;
-                        if (allowed[i][diff + 1]) {
-                            ll cost = dp[i][cur] + (nxt ? (is_row ? a[i + 1] : b[i + 1]) : 0);
-                            dp[i + 1][nxt] = min(dp[i + 1][nxt], cost);
+                // horizontal cuts
+                for (int i = 1;i < n;i++) {
+                    for (int x = 0;x <= k;x++) {
+                        if (x <= i * m && k - x <= (n - i) * m) {
+                            dp[n][m][k] = min(
+                                dp[n][m][k],
+                                m * m + dp[i][m][x] + dp[n - i][m][k - x]
+                            );
                         }
                     }
                 }
             }
-
-            return min(dp[m - 1][0], dp[m - 1][1]);
-            };
-
-        ll row_cost = solve_line(true);
-        ll col_cost = solve_line(false);
-
-        if (row_cost == INF || col_cost == INF)
-            cout << -1 << "\n";
-        else
-            cout << row_cost + col_cost << "\n";
+        }
     }
+
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n, m, k;
+        cin >> n >> m >> k;
+        cout << dp[n][m][k] << "\n";
+    }
+
+    return 0;
 }
