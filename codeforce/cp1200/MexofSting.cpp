@@ -1,6 +1,4 @@
-#include <iostream>
-#include <unordered_set>
-#include <string>
+#include<bits/stdc++.h>
 using namespace std;
 
 string find_mex(const string &s) {
